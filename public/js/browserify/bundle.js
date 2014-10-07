@@ -19642,7 +19642,12 @@ var NoteApp = React.createClass({displayName: 'NoteApp',
 
     render: function() {
         return (
-            React.DOM.div({className: "container top-buffer"}, 
+            React.DOM.div({className: "container"}, 
+                React.DOM.div({className: "row header"}, 
+                    React.DOM.div({className: "page-header"}, 
+                        React.DOM.h1(null, "React Note App")
+                    )
+                ), 
                 React.DOM.div({className: "row"}, 
                     NoteListBox({onEdit: this.onEdit, onAdd: this.onAdd}), 
                     NoteCreationBox({id: this.state.currentlyEdited})
@@ -19677,7 +19682,13 @@ var NoteCreationBox = React.createClass({displayName: 'NoteCreationBox',
     },
 
     render: function() {
-        var note=NoteStore.getNote(this.props.id);
+
+        var note;
+
+        if(this.props.id) {
+            note=NoteStore.getNote(this.props.id);
+        }
+
         return (
             React.DOM.div({className: "col-md-8"}, 
                 TextArea({onSave: this.handleSave, id: this.props.id, noteText: note ? note.text : ''})
@@ -19706,8 +19717,9 @@ var NoteList = React.createClass({displayName: 'NoteList',
     },
 
     render: function() {
-        var self=this;
-        var noteNodes = this.props.notes.map(function (note) {
+        var self=this,
+            notes=this.props.notes.concat().reverse();
+        var noteNodes = notes.map(function (note) {
             return (
                 Note({key: note._id, active: self.state.activeNoteId === note._id, note: note, onEdit: self.props.onEdit, onSelect: self.setActiveNote})
             );
@@ -19733,7 +19745,7 @@ var NoteStore=require('../../stores/NoteStore');
 var NoteListBox = React.createClass({displayName: 'NoteListBox',
 
     getInitialState:function(){
-      return {notes:NoteStore.getNotes(),activeNoteId:null}
+      return {notes:NoteStore.getNotes()}
     },
 
     onChange: function(notes) {
@@ -19759,7 +19771,7 @@ var NoteListBox = React.createClass({displayName: 'NoteListBox',
     render: function() {
         return (
             React.DOM.div({className: "col-md-4"}, 
-                React.DOM.b(null, React.DOM.a({href: "", onClick: this.onAdd}, "Add New")), 
+                React.DOM.div({className: "centered"}, React.DOM.a({href: "", onClick: this.onAdd}, "Add New")), 
                 NoteList({ref: "noteList", notes: this.state.notes, onEdit: this.props.onEdit})
             )
         )
@@ -19786,26 +19798,32 @@ var TextArea = React.createClass({displayName: 'TextArea',
     },
 
     handleSave:function(){
+
        this.props.onSave(this.state.noteText,this.props.id);
 
        if(!this.props.id) {
-           this.refs.textarea.getDOMNode().value = '';
+           this.refs.textArea.getDOMNode().value = '';
            this.setState({noteText: ''});
        }
 
     },
 
     componentWillReceiveProps: function(nextProps) {
+
         this.setState({
             noteText: nextProps.noteText
         });
+
+        if(!nextProps.id){
+            this.refs.textArea.getDOMNode().focus();
+        }
     },
 
     render: function() {
         return (
             React.DOM.div(null, 
-                React.DOM.textarea({ref: "textarea", cols: "100", rows: "20", value: this.state.noteText, onChange: this.handleChange}), React.DOM.br(null), 
-                React.DOM.input({type: "button", className: "btn btn-success", value: "Save", onClick: this.handleSave})
+                React.DOM.textarea({className: "form-control", ref: "textArea", cols: "100", rows: "20", value: this.state.noteText, onChange: this.handleChange}), React.DOM.br(null), 
+                React.DOM.input({type: "button", className: "btn btn-success btn-lg", value: "Save", onClick: this.handleSave})
             )
         )
     }

@@ -22,7 +22,12 @@ var NoteApp = React.createClass({
 
     render: function() {
         return (
-            <div className="container top-buffer">
+            <div className="container">
+                <div className="row header">
+                    <div className="page-header">
+                        <h1>React Note App</h1>
+                    </div>
+                </div>
                 <div className="row">
                     <NoteListBox onEdit={this.onEdit} onAdd={this.onAdd}/>
                     <NoteCreationBox id={this.state.currentlyEdited} />

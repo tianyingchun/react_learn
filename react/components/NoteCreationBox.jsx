@@ -21,10 +21,16 @@ var NoteCreationBox = React.createClass({
     },
 
     render: function() {
-        var note=NoteStore.getNote(this.props.id);
+
+        var note;
+
+        if(this.props.id) {
+            note=NoteStore.getNote(this.props.id);
+        }
+
         return (
             <div className="col-md-8">
-                <TextArea onSave={this.handleSave} id={this.props.id} noteText={note ? note.text : ''}/>
+                <TextArea onSave={this.handleSave} id={this.props.id} noteText={note ? note.text : ''} />
             </div>
         )
     }

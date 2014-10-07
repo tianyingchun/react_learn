@@ -16,26 +16,32 @@ var TextArea = React.createClass({
     },
 
     handleSave:function(){
+
        this.props.onSave(this.state.noteText,this.props.id);
 
        if(!this.props.id) {
-           this.refs.textarea.getDOMNode().value = '';
+           this.refs.textArea.getDOMNode().value = '';
            this.setState({noteText: ''});
        }
 
     },
 
     componentWillReceiveProps: function(nextProps) {
+
         this.setState({
             noteText: nextProps.noteText
         });
+
+        if(!nextProps.id){
+            this.refs.textArea.getDOMNode().focus();
+        }
     },
 
     render: function() {
         return (
             <div>
-                <textarea ref="textarea" cols="100" rows="20" value={this.state.noteText} onChange={this.handleChange}></textarea><br/>
-                <input type="button" className="btn btn-success" value="Save" onClick={this.handleSave}/>
+                <textarea className="form-control" ref="textArea" cols="100" rows="20" value={this.state.noteText} onChange={this.handleChange}></textarea><br/>
+                <input type="button" className="btn btn-success btn-lg" value="Save" onClick={this.handleSave}/>
             </div>
         )
     }

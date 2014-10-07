@@ -16,8 +16,9 @@ var NoteList = React.createClass({
     },
 
     render: function() {
-        var self=this;
-        var noteNodes = this.props.notes.map(function (note) {
+        var self=this,
+            notes=this.props.notes.concat().reverse();
+        var noteNodes = notes.map(function (note) {
             return (
                 <Note key={note._id} active={self.state.activeNoteId === note._id} note={note} onEdit={self.props.onEdit} onSelect={self.setActiveNote}/>
             );
