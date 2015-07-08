@@ -2,6 +2,12 @@
  * @jsx React.DOM
  */
 
+/**
+ *
+ * It uses `<NoteApp/>` to render the app on the server. You can create isomorphic apps by rendering React on both Server
+ * and Client.
+ */
+
 var React = require('react');
 var NoteApp=require('./components/NoteApp.jsx');
 
@@ -21,7 +27,6 @@ var App = React.createClass({
                 <body>
                     <NoteApp/>
                     <script type="text/javascript" src="/js/browserify/bundle.js"></script>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
                     <script src="js/bootstrap.js"></script>
                 </body>
             </html>
