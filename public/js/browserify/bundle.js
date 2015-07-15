@@ -21665,10 +21665,11 @@ exports.throwIf = function(val,msg){
  * It uses `<NoteApp/>` to render the app on the server. You can create isomorphic apps by rendering React on both Server
  * and Client.
  */
+
 // for ie8 Polyfills
-var Es5Shim = require("es5-shim/es5-shim");
-var Es5Sham = require("es5-shim/es5-sham");
-var Es5Sham = require("console-polyfill");
+var es5Shim = require("es5-shim/es5-shim");
+var es5Sham = require("es5-shim/es5-sham");
+var consolePolyfill = require("console-polyfill");
 
 var React = require('react');
 var NoteApp=require('./components/NoteApp.jsx');
