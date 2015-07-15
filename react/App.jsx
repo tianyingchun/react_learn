@@ -7,10 +7,13 @@
  * It uses `<NoteApp/>` to render the app on the server. You can create isomorphic apps by rendering React on both Server
  * and Client.
  */
+// for ie8 Polyfills
+var Es5Shim = require("es5-shim/es5-shim");
+var Es5Sham = require("es5-shim/es5-sham");
+var Es5Sham = require("console-polyfill");
 
 var React = require('react');
 var NoteApp=require('./components/NoteApp.jsx');
-
 var App = React.createClass({
     render: function() {
         return (
@@ -27,7 +30,6 @@ var App = React.createClass({
                 <body>
                     <NoteApp/>
                     <script type="text/javascript" src="/js/browserify/bundle.js"></script>
-                    <script src="js/bootstrap.js"></script>
                 </body>
             </html>
         )
