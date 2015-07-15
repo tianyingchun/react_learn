@@ -21751,7 +21751,7 @@ module.exports=Note;
 var React = require('react');
 var NoteListBox=require('./NoteListBox.jsx');
 var NoteCreationBox=require('./NoteCreationBox.jsx');
-
+var Render = require("./Render.jsx");
 var NoteApp = React.createClass({displayName: 'NoteApp',
 
     getInitialState:function(){
@@ -21771,7 +21771,8 @@ var NoteApp = React.createClass({displayName: 'NoteApp',
             React.DOM.div({className: "container"}, 
                 React.DOM.div({className: "row header"}, 
                     React.DOM.div({className: "page-header"}, 
-                        React.DOM.h1(null, "React Note App")
+                        React.DOM.h1(null, "React Note App"), 
+                        Render(null)
                     )
                 ), 
                 React.DOM.div({className: "row"}, 
@@ -21784,7 +21785,7 @@ var NoteApp = React.createClass({displayName: 'NoteApp',
 });
 
 module.exports=NoteApp;
-},{"./NoteCreationBox.jsx":167,"./NoteListBox.jsx":169,"react":149}],167:[function(require,module,exports){
+},{"./NoteCreationBox.jsx":167,"./NoteListBox.jsx":169,"./Render.jsx":170,"react":149}],167:[function(require,module,exports){
 /**
  * @jsx React.DOM
  */
@@ -21824,7 +21825,7 @@ var NoteCreationBox = React.createClass({displayName: 'NoteCreationBox',
 });
 
 module.exports=NoteCreationBox;
-},{"../../actions/NoteActions.js":1,"../../stores/NoteStore.js":171,"./TextArea.jsx":170,"react":149}],168:[function(require,module,exports){
+},{"../../actions/NoteActions.js":1,"../../stores/NoteStore.js":172,"./TextArea.jsx":171,"react":149}],168:[function(require,module,exports){
 /**
  * @jsx React.DOM
  */
@@ -21905,7 +21906,29 @@ var NoteListBox = React.createClass({displayName: 'NoteListBox',
 });
 
 module.exports=NoteListBox;
-},{"../../stores/NoteStore":171,"./NoteList.jsx":168,"react":149}],170:[function(require,module,exports){
+},{"../../stores/NoteStore":172,"./NoteList.jsx":168,"react":149}],170:[function(require,module,exports){
+/**
+ * @jsx React.DOM
+ */
+
+var React = require('react');
+
+var RenderTest = React.createClass({displayName: 'RenderTest',
+
+    handleEdit:function(id,event){
+        event.preventDefault();
+        this.props.onEdit(id);
+        this.props.onSelect(id);
+    },
+
+    render: function() { 
+    	// 返回NULL 什么也不输出，这个对DIALOG 设计上很有用.
+        return null;
+    }
+});
+
+module.exports=RenderTest;
+},{"react":149}],171:[function(require,module,exports){
 /**
  * @jsx React.DOM
  */
@@ -21956,7 +21979,7 @@ var TextArea = React.createClass({displayName: 'TextArea',
 });
 
 module.exports=TextArea;
-},{"../../stores/NoteStore":171,"react":149}],171:[function(require,module,exports){
+},{"../../stores/NoteStore":172,"react":149}],172:[function(require,module,exports){
 /**
  * Created by Sandeep on 06/10/14.
  */
@@ -22002,4 +22025,4 @@ var NoteStore = Reflux.createStore({
 });
 
 module.exports=NoteStore;
-},{"../actions/NoteActions":1,"reflux":158}]},{},[163,164,165,166,167,168,169,170]);
+},{"../actions/NoteActions":1,"reflux":158}]},{},[163,164,165,166,167,168,169,170,171]);

@@ -5,7 +5,7 @@
 var React = require('react');
 var NoteListBox=require('./NoteListBox.jsx');
 var NoteCreationBox=require('./NoteCreationBox.jsx');
-
+var Render = require("./Render.jsx");
 var NoteApp = React.createClass({
 
     getInitialState:function(){
@@ -26,6 +26,7 @@ var NoteApp = React.createClass({
                 <div className="row header">
                     <div className="page-header">
                         <h1>React Note App</h1>
+                        <Render />
                     </div>
                 </div>
                 <div className="row">
