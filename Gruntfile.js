@@ -67,7 +67,7 @@ module.exports = function(grunt) {
                     cwd: './public/js/browserify', // Src matches are relative to this path.
                     src: ['**/*.js'], // Actual pattern(s) to match.
                     dest: 'public/js/browserify', // Destination path prefix.
-                    ext: '.js', // Dest filepaths will have this extension.
+                    ext: '.min.js', // Dest filepaths will have this extension.
                     extDot: 'first' // Extensions in filenames begin after the first dot
                 }]
             }
