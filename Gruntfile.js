@@ -26,8 +26,8 @@ module.exports = function(grunt) {
 
         jshint: {
             all: [
-                'Gruntfile.js',
-                '<%= _modules.reactJsx %>'
+                'Gruntfile.js' //,
+                // '<%= _modules.reactJsx %>'
                 //, '....other files'
             ],
             options: {
@@ -40,17 +40,17 @@ module.exports = function(grunt) {
         // react nature principle, learn purpose.
         react: {
             // single_file_output: {
-            // 	files: {
-            // 		'path/to/output/dir/output.js': 'path/to/jsx/templates/dir/input.jsx'
-            // 	}
+            //     files: {
+            //         'path/to/output/dir/output.js': 'path/to/jsx/templates/dir/input.jsx'
+            //     }
             // },
             // combined_file_output: {
-            // 	files: {
-            // 		'path/to/output/dir/combined.js': [
-            // 			'path/to/jsx/templates/dir/input1.jsx',
-            // 			'path/to/jsx/templates/dir/input2.jsx'
-            // 		]
-            // 	}
+            //     files: {
+            //         'path/to/output/dir/combined.js': [
+            //             'path/to/jsx/templates/dir/input1.jsx',
+            //             'path/to/jsx/templates/dir/input2.jsx'
+            //         ]
+            //     }
             // },
             options: {
                 sourceMap: true
@@ -147,7 +147,7 @@ module.exports = function(grunt) {
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
     grunt.registerTask('default', [
-        /*'jshint',*/ 'browserify:client_debug'
+        'jshint', 'browserify:client_debug'
     ]);
     grunt.registerTask('prod', [
         'browserify:client_prod', "uglify"
