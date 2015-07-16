@@ -21911,14 +21911,14 @@ module.exports=NoteListBox;
  * @jsx React.DOM
  */
 
-var React = require('react');
+var React = require('react'); 
 
 var RenderTest = React.createClass({displayName: 'RenderTest',
 
     handleEdit:function(id,event){
         event.preventDefault();
         this.props.onEdit(id);
-        this.props.onSelect(id);
+        this.props.onSelect(id); 
     },
 
     render: function() { 

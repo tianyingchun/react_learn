@@ -11,6 +11,7 @@ module.exports = function(grunt) {
 
         browserify: {
             options: {
+                debug: true,
                 transform: [ require('grunt-react').browserify ]
             },
             client: {
