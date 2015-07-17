@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Render React on Server
 app.get('/', function(req, res) {
-	var markup = React.renderComponentToString(App());
+	var markup = React.renderToString(App());
 	res.send('<!DOCTYPE html>' + markup);
 });
 

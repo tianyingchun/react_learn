@@ -108,8 +108,9 @@ module.exports = function(grunt) {
 						}]
 					]
 				},
-				src: ['<%= _modules.reactJsx %>'],
-				dest: '<%= _modules.bundleDestDir %>/bundle.js'
+				files: {
+					'<%= _modules.bundleDestDir %>/bundle.js': ['<%= _modules.reactJsx %>'],
+				}
 			},
 			// for release
 			'production': {
