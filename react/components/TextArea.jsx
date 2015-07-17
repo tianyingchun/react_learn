@@ -8,7 +8,7 @@ var React = require('react');
 var TextArea = React.createClass({
 
     propTypes: {
-        id: React.PropTypes.string,
+        id: React.PropTypes.number,
         onSave: React.PropTypes.func
     },
 

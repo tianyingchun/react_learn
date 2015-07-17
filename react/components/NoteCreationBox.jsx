@@ -10,7 +10,7 @@ var NoteStore = require('../../stores/NoteStore.js');
 var NoteCreationBox = React.createClass({
 
     propTypes: {
-        id: React.PropTypes.string
+        id: React.PropTypes.number
     },
     handleSave: function(noteText, id) {
 

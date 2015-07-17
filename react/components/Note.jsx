@@ -6,8 +6,8 @@ var React = require('react');
 
 var Note = React.createClass({
     propTypes: {
-        active: React.PropTypes.string,
-        note: React.PropTypes.array,
+        active: React.PropTypes.bool,
+        note: React.PropTypes.object,
         onEdit: React.PropTypes.func,
         onSelect: React.PropTypes.func
     },

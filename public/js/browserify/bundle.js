@@ -21725,8 +21725,8 @@ var React = require('react');
 
 var Note = React.createClass({displayName: 'Note',
     propTypes: {
-        active: React.PropTypes.string,
-        note: React.PropTypes.array,
+        active: React.PropTypes.bool,
+        note: React.PropTypes.object,
         onEdit: React.PropTypes.func,
         onSelect: React.PropTypes.func
     },
@@ -21814,7 +21814,7 @@ var NoteStore = require('../../stores/NoteStore.js');
 var NoteCreationBox = React.createClass({displayName: 'NoteCreationBox',
 
     propTypes: {
-        id: React.PropTypes.string
+        id: React.PropTypes.number
     },
     handleSave: function(noteText, id) {
 
@@ -21983,7 +21983,7 @@ var React = require('react');
 var TextArea = React.createClass({displayName: 'TextArea',
 
     propTypes: {
-        id: React.PropTypes.string,
+        id: React.PropTypes.number,
         onSave: React.PropTypes.func
     },
 
