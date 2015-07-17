@@ -24,15 +24,15 @@ module.exports = function(grunt) {
             bundleDestDir: './public/js/browserify'
         },
 
-        jshint: {
-            all: [
-                'Gruntfile.js' //,
-                // '<%= _modules.reactJsx %>'
-                //, '....other files'
-            ],
+        "jshint-jsx": {
             options: {
                 jshintrc: '.jshintrc'
             },
+            react: [
+                'Gruntfile.js',
+                '<%= _modules.reactJsx %>'
+                //, '....other files'
+            ]
         },
         // grunt react plugin
         // https://www.npmjs.com/package/grunt-react#options-sourcemap
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
         watch: {
             react: {
                 files: ['<%= _modules.reactJsx %>', 'actions/*.js', 'stores/**/*.js'],
-                tasks: ['browserify']
+                tasks: ['browserify:client_debug']
             }
         },
         uglify: {
@@ -147,7 +147,7 @@ module.exports = function(grunt) {
     require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
     grunt.registerTask('default', [
-        'jshint', 'browserify:client_debug'
+        'jshint-jsx', 'browserify:client_debug'
     ]);
     grunt.registerTask('prod', [
         'browserify:client_prod', "uglify"
