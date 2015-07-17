@@ -22,3 +22,11 @@ The app is accessible at http://localhost:8000 and works as following:
 ### related react node package.
 
 1.  bluebird(http ajax), reflux.
+
+
+### Sublime react js plugin:
+	- babel
+	- Reactjs
+	- SublimeLinter-jsxlint
+	- .eslintrc
+
