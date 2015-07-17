@@ -113,7 +113,9 @@ module.exports = function(grunt) {
 				browserifyOptions: {
 					debug: true
 				},
-				transform: [require('grunt-react').browserify]
+				// using reactify instead
+				// transform: [require('grunt-react').browserify]
+				transform: [['reactify', {'es6': true}]]
 			},
 			// for debug
 			'debug': {
