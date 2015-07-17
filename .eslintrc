@@ -20,6 +20,7 @@
 	},
 	"rules": {
 		// babel-eslint
+		// http://eslint.org/docs/rules/
 	    "quotes": [2, "single"], // no 3 but ''
 	    "strict": [2, "never"], // babel-eslint has some issue with "use strict" , disable it
 		"no-console": 2,

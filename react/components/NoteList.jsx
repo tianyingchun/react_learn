@@ -38,4 +38,4 @@ var NoteList = React.createClass({
     }
 });
 
-module.exports=NoteList;
+module.exports = NoteList;

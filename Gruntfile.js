@@ -27,26 +27,28 @@ module.exports = function(grunt) {
 		eslint: {
             //https://www.npmjs.com/package/grunt-eslint
 			options: {
-				configFile: '.eslintrc',
-                format: require('eslint-tap')
+				configFile: '.eslintrc'
+                // outputFile:''
+                // format: require('eslint-tap')
 			},
 			react: [
-				'Gruntfile.js',
-				'<%= _modules.reactJsx %>'
-				//, '....other files'
+				// 'Gruntfile.js',
+				'<%= _modules.reactJsx %>',
+				'./stores/**/*.js',
+				'./actions/**/*.js'
 			]
 		},
 		// grunt react plugin
 		// https://www.npmjs.com/package/grunt-react#options-sourcemap
-		// using react grunt we can transform all .jsx to corresponding .js in order to we can know about the 
+		// using react grunt we can transform all .jsx to corresponding .js in order to we can know about the
 		// react nature principle, learn purpose.
 		react: {
-			// single_file_output: {
+			// singleFileOutput: {
 			//     files: {
 			//         'path/to/output/dir/output.js': 'path/to/jsx/templates/dir/input.jsx'
 			//     }
 			// },
-			// combined_file_output: {
+			// combinedFileOutput: {
 			//     files: {
 			//         'path/to/output/dir/combined.js': [
 			//             'path/to/jsx/templates/dir/input1.jsx',
@@ -57,7 +59,7 @@ module.exports = function(grunt) {
 			options: {
 				sourceMap: true
 			},
-			dynamic_mappings: {
+			dynamicMappings: {
 				files: [{
 					expand: true,
 					cwd: '<%= _modules.cwd %>',
@@ -77,16 +79,16 @@ module.exports = function(grunt) {
 		uglify: {
 			//document: https://www.npmjs.com/package/grunt-contrib-uglify
 			options: {
-				banner: "<%= banner%>",
+				banner: '<%= banner%>',
 
 				compress: {
-					// maybe in our js code: 
+					// maybe in our js code:
 					// if we set global_defs.DEBUG==false, it will ignore console.log("xxxxx")
 					// if(DEBUG) {
 					//     console.log("xxxx")
 					// }
 					global_defs: {
-						"DEBUG": false
+						'DEBUG': false
 					},
 					dead_code: true
 				}
@@ -113,12 +115,12 @@ module.exports = function(grunt) {
 				transform: [require('grunt-react').browserify]
 			},
 			// for debug
-			client_debug: {
+			'debug': {
 				src: ['<%= _modules.reactJsx %>'],
 				dest: '<%= _modules.bundleDestDir %>/bundle.js'
 			},
 			// for release
-			client_prod: {
+			'production': {
 				options: {
 					browserifyOptions: {
 						debug: false
@@ -146,12 +148,12 @@ module.exports = function(grunt) {
 	// grunt.loadNpmTasks('grunt-nodemon');
 	// We load grunt tasks listed in package.json file
 	// require('load-grunt-tasks')(grunt);
-	require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
 	grunt.registerTask('default', [
-		'eslint', 'browserify:client_debug'
+		'eslint', 'browserify:debug'
 	]);
 	grunt.registerTask('prod', [
-		'browserify:client_prod', "uglify"
+		'browserify:production', 'uglify'
 	]);
 };

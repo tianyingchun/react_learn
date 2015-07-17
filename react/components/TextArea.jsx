@@ -3,15 +3,13 @@
  */
 
 var React = require('react');
-var NoteStore = require('../../stores/NoteStore');
+// var NoteStore = require('../../stores/NoteStore');
 
 var TextArea = React.createClass({
 
-    displayName: "TextArea",
-
     propTypes: {
         id: React.PropTypes.string,
-        onSave: React.PropTypes.fn
+        onSave: React.PropTypes.func
     },
 
     getInitialState: function() {
@@ -30,7 +28,7 @@ var TextArea = React.createClass({
             this.refs.textArea.getDOMNode().focus();
         }
     },
-      
+
     handleChange: function(event) {
         this.setState({
             noteText: event.target.value
@@ -48,15 +46,14 @@ var TextArea = React.createClass({
             });
         }
     },
-    
     render: function() {
         return (
             <div>
                 <textarea className="form-control" cols="100" onChange={this.handleChange} ref="textArea" rows="20" value={this.state.noteText} ></textarea><br/>
                 <input type="button" className="btn btn-success btn-lg" onClick={this.handleSave} value="Save" />
             </div>
-        )
+        );
     }
 });
 
-module.exports=TextArea;
+module.exports = TextArea;

@@ -9,12 +9,12 @@
  */
 
 // for ie8 Polyfills
-var es5Shim = require("es5-shim/es5-shim");
-var es5Sham = require("es5-shim/es5-sham");
-var consolePolyfill = require("console-polyfill");
+require('es5-shim/es5-shim');
+require('es5-shim/es5-sham');
+require('console-polyfill');
 
 var React = require('react');
-var NoteApp=require('./components/NoteApp.jsx');
+var NoteApp = require('./components/NoteApp.jsx');
 var App = React.createClass({
     render: function() {
         return (
@@ -33,9 +33,9 @@ var App = React.createClass({
                     <script type="text/javascript" src="/js/browserify/bundle.js"></script>
                 </body>
             </html>
-        )
+        );
     }
 });
 
 
-module.exports=App;
+module.exports = App;

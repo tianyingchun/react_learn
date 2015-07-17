@@ -8,7 +8,7 @@ var RenderTest = React.createClass({
 
 	propTypes: {
 		onEdit: React.PropTypes.func,
-		onSelect: React.propTypes.func
+		onSelect: React.PropTypes.func
 	},
 	handleEdit: function(id, event) {
 		event.preventDefault();

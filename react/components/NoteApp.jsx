@@ -3,21 +3,27 @@
  */
 
 var React = require('react');
-var NoteListBox=require('./NoteListBox.jsx');
-var NoteCreationBox=require('./NoteCreationBox.jsx');
-var Render = require("./Render.jsx");
+var NoteListBox = require('./NoteListBox.jsx');
+var NoteCreationBox = require('./NoteCreationBox.jsx');
+var Render = require('./Render.jsx');
 var NoteApp = React.createClass({
 
-    getInitialState:function(){
-        return {id:null}
+    getInitialState: function() {
+        return {
+            id: null
+        };
     },
 
-    onEdit:function(id){
-        this.setState({currentlyEdited:id});
+    onEdit: function(id){
+        this.setState({
+            currentlyEdited: id
+        });
     },
 
-    onAdd:function(){
-        this.setState({currentlyEdited:null});
+    onAdd: function(){
+        this.setState({
+            currentlyEdited: null
+        });
     },
 
     render: function() {
@@ -34,8 +40,8 @@ var NoteApp = React.createClass({
                     <NoteCreationBox id={this.state.currentlyEdited} />
                 </div>
             </div>
-        )
+        );
     }
 });
 
-module.exports=NoteApp;
+module.exports = NoteApp;

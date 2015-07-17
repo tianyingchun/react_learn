@@ -4,18 +4,19 @@
 
 var React = require('react');
 var NoteList = require('./NoteList.jsx');
-var NoteStore=require('../../stores/NoteStore');
+var NoteStore = require('../../stores/NoteStore');
 
 var NoteListBox = React.createClass({
 
-    getInitialState:function(){
-      return {notes:NoteStore.getNotes()}
+    propTypes: {
+        onAdd: React.PropTypes.func,
+        onEdit: React.PropTypes.func
     },
 
-    onChange: function(notes) {
-        this.setState({
-            notes: notes
-        });
+    getInitialState: function(){
+        return {
+            notes: NoteStore.getNotes()
+        };
     },
 
     componentDidMount: function() {
@@ -26,7 +27,13 @@ var NoteListBox = React.createClass({
         this.unsubscribe();
     },
 
-    onAdd:function(event){
+    onChange: function(notes) {
+        this.setState({
+            notes: notes
+        });
+    },
+
+    onAdd: function(event){
         event.preventDefault();
         this.props.onAdd();
         this.refs.noteList.setActiveNote(null);
@@ -38,8 +45,8 @@ var NoteListBox = React.createClass({
                 <div className="centered"><a href="" onClick={this.onAdd}>Add New</a></div>
                 <NoteList ref="noteList" notes={this.state.notes} onEdit={this.props.onEdit} />
             </div>
-        )
+        );
     }
 });
 
-module.exports=NoteListBox;
+module.exports = NoteListBox;
