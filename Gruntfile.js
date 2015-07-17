@@ -26,11 +26,11 @@ module.exports = function(grunt) {
 
 		eslint: {
 			//http://eslint.org/docs/rules/
-            //https://www.npmjs.com/package/grunt-eslint
+			//https://www.npmjs.com/package/grunt-eslint
 			options: {
 				configFile: '.eslintrc'
-                // outputFile:''
-                // format: require('eslint-tap')
+					// outputFile:''
+					// format: require('eslint-tap')
 			},
 			react: [
 				// 'Gruntfile.js',
@@ -44,19 +44,6 @@ module.exports = function(grunt) {
 		// using react grunt we can transform all .jsx to corresponding .js in order to we can know about the
 		// react nature principle, learn purpose.
 		react: {
-			// singleFileOutput: {
-			//     files: {
-			//         'path/to/output/dir/output.js': 'path/to/jsx/templates/dir/input.jsx'
-			//     }
-			// },
-			// combinedFileOutput: {
-			//     files: {
-			//         'path/to/output/dir/combined.js': [
-			//             'path/to/jsx/templates/dir/input1.jsx',
-			//             'path/to/jsx/templates/dir/input2.jsx'
-			//         ]
-			//     }
-			// },
 			options: {
 				sourceMap: true
 			},
@@ -109,16 +96,18 @@ module.exports = function(grunt) {
 		},
 		// using browerify automatically combined all jsx and js file to boudle.js with sourceMap in debug mode.
 		browserify: {
-			options: {
-				browserifyOptions: {
-					debug: true
-				},
-				// using reactify instead
-				// transform: [require('grunt-react').browserify]
-				transform: [['reactify', {'es6': true}]]
-			},
-			// for debug
+			// for debug mode using reactify plugin
 			'debug': {
+				options: {
+					browserifyOptions: {
+						debug: true
+					},
+					transform: [
+						['reactify', {
+							'es6': true
+						}]
+					]
+				},
 				src: ['<%= _modules.reactJsx %>'],
 				dest: '<%= _modules.bundleDestDir %>/bundle.js'
 			},
@@ -127,7 +116,8 @@ module.exports = function(grunt) {
 				options: {
 					browserifyOptions: {
 						debug: false
-					}
+					},
+					transform: [require('grunt-react').browserify]
 				},
 				src: ['<%= _modules.reactJsx %>'],
 				dest: '<%= _modules.bundleDestDir %>/bundle.js'
