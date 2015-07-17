@@ -25,6 +25,7 @@ module.exports = function(grunt) {
 		},
 
 		eslint: {
+			//http://eslint.org/docs/rules/
             //https://www.npmjs.com/package/grunt-eslint
 			options: {
 				configFile: '.eslintrc'
