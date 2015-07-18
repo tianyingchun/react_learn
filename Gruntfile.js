@@ -13,6 +13,7 @@ module.exports = function(grunt) {
 
 	//
 	// reference: grunt-react/Gruntfile.js
+	// https://github.com/jmreidy/grunt-browserify
 	// http://javascript.ruanyifeng.com/tool/browserify.html
 	// http://javascript.ruanyifeng.com/tool/grunt.html
 	// -------------------------------------------------------------------
