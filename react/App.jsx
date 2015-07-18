@@ -30,7 +30,7 @@ var App = React.createClass({
                 </head>
                 <body>
                     <NoteApp/>
-                    <script type="text/javascript" src="/js/vendor/react.min.js"></script>
+                    <script type="text/javascript" src="/js/vendor/vendor.js"></script>
                     <script type="text/javascript" src="/js/browserify/bundle.js"></script>
                 </body>
             </html>

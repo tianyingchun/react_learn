@@ -2081,7 +2081,7 @@ var App = React.createClass({displayName: "App",
                 ), 
                 React.createElement("body", null, 
                     React.createElement(NoteApp, null), 
-                    React.createElement("script", {type: "text/javascript", src: "/js/vendor/react.min.js"}), 
+                    React.createElement("script", {type: "text/javascript", src: "/js/vendor/vendor.js"}), 
                     React.createElement("script", {type: "text/javascript", src: "/js/browserify/bundle.js"})
                 )
             )

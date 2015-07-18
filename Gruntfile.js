@@ -107,7 +107,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true, // Enable dynamic expansion.
 					cwd: '<%= _modules.vendorDestDir %>', // Src matches are relative to this path.
-					src: 'react.js', // Actual pattern(s) to match.
+					src: 'vendor.js', // Actual pattern(s) to match.
 					dest: '<%= _modules.vendorDestDir %>', // Destination path prefix.
 					ext: '.min.js', // Dest filepaths will have this extension.
 					extDot: 'first' // Extensions in filenames begin after the first dot
@@ -125,22 +125,19 @@ module.exports = function(grunt) {
 		browserify: {
 			// Cause of we don't want to build react,reflux libaray to bundle.js
 			// using `external` to ignore it.
-			'reactExternal': {
+			'vendor': {
 				options: {
-					require: ['react', 'reflux'],
-					transform: [require('grunt-react').browserify]
+					require: ['react', 'reflux']
 				},
-				src: ['react', 'reflux'],
-				dest: '<%= _modules.externalDestDir %>/react.js'
+				src: [],
+				dest: '<%= _modules.externalDestDir %>/vendor.js'
 			},
 			// for debug mode using reactify plugin
-			'debug': {
+			'clientDebug': {
 				options: {
 					// excluded react, reflux dependancy while compile phase.
-					external: [
-						'react',
-						'reflux'
-					],
+					external: ['react', 'reflux'],
+
 					browserifyOptions: {
 						debug: true
 					},
@@ -155,13 +152,11 @@ module.exports = function(grunt) {
 				}
 			},
 			// for release
-			'production': {
+			'clientProd': {
 				options: {
 					// excluded react, reflux dependancy while compile phase.
-					external: [
-						'react',
-						'reflux'
-					],
+					external: ['react', 'reflux'],
+
 					transform: [require('grunt-react').browserify]
 				},
 				src: ['<%= _modules.reactJsx %>'],
@@ -189,9 +184,9 @@ module.exports = function(grunt) {
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
 	grunt.registerTask('default', [
-		'eslint', 'browserify:reactExternal', 'browserify:debug'
+		'eslint', 'browserify:vendor', 'browserify:clientDebug'
 	]);
 	grunt.registerTask('prod', [
-		'browserify:production', 'browserify:reactExternal', 'uglify'
+		'browserify:vendor', 'browserify:clientProd', 'uglify'
 	]);
 };
