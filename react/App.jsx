@@ -8,10 +8,11 @@
  * and Client.
  */
 
-// for ie8 Polyfills
-require('es5-shim/es5-shim');
-require('es5-shim/es5-sham');
-require('console-polyfill');
+// for ie8 Polyfills, but we should't require it in projecet
+// we should use grunt task to build ie8fix modules
+// require('es5-shim/es5-shim');
+// require('es5-shim/es5-sham');
+// require('console-polyfill');
 
 var React = require('react');
 var NoteApp = require('./components/NoteApp.jsx');
@@ -30,7 +31,7 @@ var App = React.createClass({
                 </head>
                 <body>
                     <NoteApp/>
-                    <script type="text/javascript" src="/js/vendor/vendor.js"></script>
+                    <script type="text/javascript" src="/js/vendor/react.js"></script>
                     <script type="text/javascript" src="/js/browserify/bundle.js"></script>
                 </body>
             </html>
