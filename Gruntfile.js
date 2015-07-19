@@ -144,6 +144,7 @@ module.exports = function(grunt) {
             },
             'vendorIe8': {
                 options: {
+                	// 'queryselector-polyfill' for ie6,7
                     require: ['es5-shim/es5-shim', 'es5-shim/es5-sham', 'console-polyfill']
                 },
                 src: [],
@@ -153,7 +154,7 @@ module.exports = function(grunt) {
             'clientDebug': {
                 options: {
                     // excluded react, reflux dependancy while compile phase.
-                    external: ['react', 'reflux', 'es5-shim/es5-shim', 'es5-shim/es5-sham', 'console-polyfill'],
+                    external: ['react', 'reflux'],
 
                     browserifyOptions: {
                         debug: true,
@@ -173,7 +174,7 @@ module.exports = function(grunt) {
             'clientProd': {
                 options: {
                     // excluded react, reflux dependancy while compile phase.
-                    external: ['react', 'reflux', 'es5-shim/es5-shim', 'es5-shim/es5-sham', 'console-polyfill'],
+                    external: ['react', 'reflux'],
 
                     browserifyOptions: {
                         debug: false,
