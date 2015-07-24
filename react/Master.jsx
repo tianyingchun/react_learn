@@ -16,7 +16,7 @@
 
 var React = require('react');
 var NoteApp = require('./components/NoteApp.jsx');
-var App = React.createClass({
+var Master = React.createClass({
     render: function() {
         return (
             <html>
@@ -30,6 +30,7 @@ var App = React.createClass({
                     <link href="css/app.css" rel="stylesheet"/>
                 </head>
                 <body>
+
                     <NoteApp/>
                     <script type="text/javascript" src="/js/vendor/react.js"></script>
                     <script type="text/javascript" src="/js/browserify/bundle.js"></script>
@@ -40,4 +41,4 @@ var App = React.createClass({
 });
 
 
-module.exports = App;
+module.exports = Master;

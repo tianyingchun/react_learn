@@ -9,8 +9,10 @@ var bodyParser = require('body-parser');
 require('node-jsx').install({
     extension: '.jsx'
 });
-var App = require('./react/App.jsx');
+var App = require('./react/Bootstrap.jsx');
 var React = require('react');
+var ReactRouter = require('react-router');
+var ExpressLocation = require('react-router-express');
 
 var DOM = React.DOM,
     body = DOM.body,
@@ -35,11 +37,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Render React on Server
 app.get('/', function(req, res) {
-    res.setHeader('Content-Type', 'text/html');
-    var AppFactory =  React.createFactory(App);
-    var markup = React.renderToString(AppFactory());
+    var location = new ExpressLocation(req.url, res);
+    ReactRouter.run(App, location, function(Root) {
+        res.setHeader('Content-Type', 'text/html');
+        var AppFactory = React.createFactory(Root);
+        var markup = React.renderToString(AppFactory());
 
-    res.send('<!DOCTYPE html>' + markup);
+        res.send('<!DOCTYPE html>' + markup);
+    });
 });
 
 
