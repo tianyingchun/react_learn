@@ -38,6 +38,10 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// capture /noteapp don't go into server rendering...
+app.get('/noteapp',function(req, res) {
+    res.render("index");
+});
 // Render React on Server
 app.use(function(req, res) {
     var location = new ExpressLocation(req.url, res);
