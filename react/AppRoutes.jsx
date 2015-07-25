@@ -18,8 +18,8 @@ var NoteApp = require('./components/NoteApp.jsx');
 
 var AppRoutes = (
   <Route name="root" path="/" handler={Master}>
-    <Route name="home" handler={Home} />
-    <Route name="noteapp" handler={NoteApp} />
+    <Route name="home" handler={Home}/>
+    <Route name="noteapp" handler={NoteApp}/>
     <DefaultRoute handler={Home}/>
   </Route>
 );

@@ -9,7 +9,8 @@ var NoteApp = React.createClass({
 
     getInitialState: function() {
         return {
-            id: null
+            id: null,
+            currentlyEdited: 0
         };
     },
 
@@ -21,7 +22,7 @@ var NoteApp = React.createClass({
 
     onAdd: function(){
         this.setState({
-            currentlyEdited: null
+            currentlyEdited: 0
         });
     },
 

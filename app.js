@@ -46,7 +46,6 @@ app.use(function(req, res) {
         res.setHeader('Content-Type', 'text/html');
         var AppFactory = React.createFactory(Root);
         var markup = React.renderToString(AppFactory());
-
         res.send('<!DOCTYPE html>' + markup);
     });
 });
