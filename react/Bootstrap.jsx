@@ -6,7 +6,7 @@
  *  For rendering the app on client side.
  */
 var React = require('react');
-var AppRoutes = require('./App-Router.jsx');
+var AppRoutes = require('./AppRoutes.jsx');
 var Router = require('react-router');
 
 if (typeof window !== 'undefined') {
@@ -16,6 +16,7 @@ if (typeof window !== 'undefined') {
         // initializer/constructor method.
             .create({
                 routes: AppRoutes,
+                location: Router.HistoryLocation,
                 scrollBehavior: Router.ScrollToTopBehavior
             })
             // This is our callback function, whenever the url changes it will be called again.

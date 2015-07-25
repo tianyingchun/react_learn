@@ -14,11 +14,13 @@ var DefaultRoute = Router.DefaultRoute;
 // Here we define all our material-ui ReactComponents.
 var Master = require('./Master.jsx');
 var Home = require('./components/Home.jsx');
+var NoteApp = require('./components/NoteApp.jsx');
 
 var AppRoutes = (
   <Route name="root" path="/" handler={Master}>
     <Route name="home" handler={Home} />
-    <DefaultRoute handler={Master}/>
+    <Route name="noteapp" handler={NoteApp} />
+    <DefaultRoute handler={Home}/>
   </Route>
 );
 

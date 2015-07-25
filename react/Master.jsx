@@ -15,7 +15,12 @@
 // require('console-polyfill');
 
 var React = require('react');
-var NoteApp = require('./components/NoteApp.jsx');
+var ReactRouter = require('react-router');
+// var Router = ReactRouter.Router;
+// var Route = ReactRouter.Route;
+// var Link = ReactRouter.Link;
+var RouteHandler = ReactRouter.RouteHandler;
+
 var Master = React.createClass({
     render: function() {
         return (
@@ -30,8 +35,7 @@ var Master = React.createClass({
                     <link href="css/app.css" rel="stylesheet"/>
                 </head>
                 <body>
-
-                    <NoteApp/>
+                    <RouteHandler />
                     <script type="text/javascript" src="/js/vendor/react.js"></script>
                     <script type="text/javascript" src="/js/browserify/bundle.js"></script>
                 </body>
