@@ -87,6 +87,17 @@ module.exports = function(grunt) {
                 tasks: ['browserify:client_debug']
             }
         },
+         concat: {
+       // The ie8 polyfill support for reactjs.
+        vendorIe8: {
+            src: [
+              './public/lib/es5-shim/es5-shim.js',
+              './public/lib/es5-shim/es5-sham.js',
+              './public/lib/console-polyfill/**/*.js'
+            ],
+            dest: '<%= _modules.vendorDestDir %>/react.ie8fix.js'
+          }
+        },
         uglify: {
             //document: https://www.npmjs.com/package/grunt-contrib-uglify
             options: {
@@ -104,31 +115,27 @@ module.exports = function(grunt) {
                     dead_code: true
                 }
             },
+            // The ie8 polyfill support for reactjs.
+            vendorIe8: {
+                src: [
+                  '<%=concat.vendorIe8.dest%>'
+                ],
+                dest: '<%= _modules.vendorDestDir %>/react.ie8fix.min.js'
+            },
             // uglify task configuration goes here.
             // the named <core> `target`
             prodBuild: {
-                files: [{
-                    expand: true, // Enable dynamic expansion.
-                    cwd: '<%= _modules.vendorDestDir %>', // Src matches are relative to this path.
-                    src: 'react.js', // Actual pattern(s) to match.
-                    dest: '<%= _modules.vendorDestDir %>', // Destination path prefix.
-                    ext: '.min.js', // Dest filepaths will have this extension.
-                    extDot: 'last' // Extensions in filenames begin after the first dot
-                }, {
-                    expand: true,
-                    cwd: '<%= _modules.vendorDestDir %>',
-                    src: 'react.ie8fix.js',
-                    dest: '<%= _modules.vendorDestDir %>',
-                    ext: '.min.js',
-                    extDot: 'last'
-                }, {
-                    expand: true,
-                    cwd: '<%= _modules.bundleDestDir %>',
-                    src: 'bundle.js',
-                    dest: '<%= _modules.bundleDestDir %>',
-                    ext: '.min.js',
-                    extDot: 'last'
-                }]
+                options: {
+                  compress: {
+                    //Specify drop_console: true as part of the compress options to discard calls to console.* function
+                    drop_console: true
+                  }
+                },
+                files: {
+                  '<%= _modules.vendorDestDir %>/react.min.js': '<%=envify.react.dest %>',
+                  '<%= _modules.vendorDestDir %>/react.ie8fix.min.js': '<%= _modules.vendorDestDir %>/react.ie8fix.js',
+                  '<%= _modules.bundleDestDir %>/bundle.min.js': '<%= _modules.bundleDestDir %>/bundle.js'
+                }
             }
         },
         // using browerify automatically combined all jsx and js file to boudle.js with sourceMap in debug mode.
@@ -151,7 +158,7 @@ module.exports = function(grunt) {
                 dest: '<%= _modules.externalDestDir %>/react.ie8fix.js'
             },
             // for debug mode using reactify plugin
-            'clientDebug': {
+            dev: {
                 options: {
                     // excluded react, reflux dependancy while compile phase.
                     external: ['react', 'reflux'],
@@ -171,7 +178,7 @@ module.exports = function(grunt) {
                 }
             },
             // for release
-            'clientProd': {
+            prod: {
                 options: {
                     // excluded react, reflux dependancy while compile phase.
                     external: ['react', 'reflux'],
@@ -206,14 +213,14 @@ module.exports = function(grunt) {
     // require('load-grunt-tasks')(grunt);
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask('browserifyVendor', [
-        'browserify:vendor', 'browserify:vendorIe8'
+    grunt.registerTask('vendor', [
+        'browserify:vendor', 'concat:vendorIe8', 'uglify:vendorIe8'
     ]);
 
     grunt.registerTask('default', [
-        'eslint', 'browserifyVendor', 'browserify:clientDebug'
+        'eslint', 'vendor', 'browserify:dev'
     ]);
     grunt.registerTask('prod', [
-        'browserifyVendor', 'browserify:clientProd', 'uglify'
+        'vendor','envify', 'browserify:prod', 'uglify:prod'
     ]);
 };

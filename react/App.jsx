@@ -31,6 +31,7 @@ var App = React.createClass({
                 </head>
                 <body>
                     <NoteApp/>
+                    <script type="text/javascript" src="/js/vendor/react.ie8fix.js"></script>
                     <script type="text/javascript" src="/js/vendor/react.js"></script>
                     <script type="text/javascript" src="/js/browserify/bundle.js"></script>
                 </body>
