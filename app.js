@@ -4,13 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var debug = require('debug')('isomorphic');
 
 //For requiring `.jsx` files as Node modules
 require('node-jsx').install({
     extension: '.jsx'
 });
-var App = require('./react/App.jsx');
+var AppRoutes = require('./react/AppRoutes.jsx');
 var React = require('react');
+// May we should use react Async to render html in server side.
+var reactAsync = require('react-async')
+var ReactRouter = require('react-router');
+var ExpressLocation = require('react-router-express');
 
 var DOM = React.DOM,
     body = DOM.body,
@@ -33,13 +38,20 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// capture /noteapp don't go into server rendering...
+app.get('/noteapp',function(req, res) {
+    res.render("index");
+});
 // Render React on Server
-app.get('/', function(req, res) {
-    res.setHeader('Content-Type', 'text/html');
-    var AppFactory =  React.createFactory(App);
-    var markup = React.renderToString(AppFactory());
-
-    res.send('<!DOCTYPE html>' + markup);
+app.use(function(req, res) {
+    var location = new ExpressLocation(req.url, res);
+    debug(req);
+    ReactRouter.run(AppRoutes, location, function(Root, state) {
+        res.setHeader('Content-Type', 'text/html');
+        var AppFactory = React.createFactory(Root);
+        var markup = React.renderToString(AppFactory());
+        res.send('<!DOCTYPE html>' + markup);
+    });
 });
 
 

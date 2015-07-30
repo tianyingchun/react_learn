@@ -3,14 +3,17 @@
  */
 
 var React = require('react');
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
+
 var NoteListBox = require('./NoteListBox.jsx');
 var NoteCreationBox = require('./NoteCreationBox.jsx');
-var Render = require('./Render.jsx');
 var NoteApp = React.createClass({
 
     getInitialState: function() {
         return {
-            id: null
+            id: null,
+            currentlyEdited: 0
         };
     },
 
@@ -22,7 +25,7 @@ var NoteApp = React.createClass({
 
     onAdd: function(){
         this.setState({
-            currentlyEdited: null
+            currentlyEdited: 0
         });
     },
 
@@ -32,7 +35,7 @@ var NoteApp = React.createClass({
                 <div className="row header">
                     <div className="page-header">
                         <h1>React Note App</h1>
-                        <Render />
+                        <RouteHandler />
                     </div>
                 </div>
                 <div className="row">

@@ -31,7 +31,7 @@ module.exports = function(grunt) {
             // the default transform react jsx source files related Gruntfile.js.
             reactJsx: './react/**/*.jsx',
 
-            reactJsxEntryFile: './react/Bootstrap.jsx',
+            reactJsxEntryFile: './react/start.jsx',
 
             // the transformed jsx destination directory for all corresponding related Gruntfile.js
             reactifyDestDir: './public/js/reactify',
